@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html class="dark scroll-smooth" lang="id">
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Om Nano | Fotografi & Videografi Profesional</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+    
+    <!-- Material Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    
+    <!-- Tailwind Configuration -->
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0df293", /* Hijau Aksen */
+                        "primary-dark": "#0ba866",
+                        "background-dark": "#0a0a0a",
+                        "neutral-dark": "#121212",
+                        "accent-dark": "#1a1a1a",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"],
+                        "serif": ["Playfair Display", "serif"]
+                    },
+                },
+            },
+        }
+    </script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .font-serif { font-family: 'Playfair Display', serif; }
+        
+        /* Flip Card Styles */
+        .flip-card { background-color: transparent; perspective: 1000px; height: 280px; }
+        .flip-card-inner { position: relative; width: 100%; height: 100%; text-align: center; transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1); transform-style: preserve-3d; }
+        .flip-card:hover .flip-card-inner { transform: rotateY(180deg); }
+        .flip-card-front, .flip-card-back { position: absolute; width: 100%; height: 100%; -webkit-backface-visibility: hidden; backface-visibility: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center; border-radius: 1rem; padding: 2rem; }
+        .flip-card-front { background-color: #1a1a1a; border: 1px solid rgba(255,255,255,0.05); }
+        .flip-card-back { background-color: #0df293; color: #0a0a0a; transform: rotateY(180deg); }
+
+        /* Hide Scrollbar for clean look */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0a0a0a; }
+        ::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #0df293; }
+
+        /* Masonry Grid Helper */
+        .masonry { column-count: 1; column-gap: 1rem; }
+        @media (min-width: 640px) { .masonry { column-count: 2; } }
+        @media (min-width: 1024px) { .masonry { column-count: 3; } }
+        .masonry-item { break-inside: avoid; margin-bottom: 1rem; }
+        
+        /* Thumb Grid Helper for Compact Gallery */
+        .thumb-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); gap: 0.5rem; }
+        @media (min-width: 640px) { .thumb-grid { grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 0.75rem; } }
+        
+        .gallery-item.hidden { display: none; }
+    </style>
+</head>
+<body class="bg-background-dark text-slate-100 antialiased selection:bg-primary selection:text-black">
+
+    <!-- Navbar -->
+    <header class="fixed top-0 z-50 w-full border-b border-white/10 bg-background-dark/80 backdrop-blur-md px-6 md:px-12 py-4">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <a href="#" class="flex items-center gap-2 text-primary hover:opacity-80 transition-opacity">
+                <span class="material-symbols-outlined text-3xl">camera</span>
+                <span class="text-white text-xl font-bold font-serif tracking-wider">OM NANO</span>
+            </a>
+            
+            <nav class="hidden md:flex items-center gap-8">
+                <a class="text-sm font-medium text-slate-300 hover:text-primary transition-colors" href="#tentang">Tentang</a>
+                <a class="text-sm font-medium text-slate-300 hover:text-primary transition-colors" href="#layanan">Layanan</a>
+                <a class="text-sm font-medium text-slate-300 hover:text-primary transition-colors" href="#portofolio">Portofolio</a>
+                <a class="text-sm font-medium text-slate-300 hover:text-primary transition-colors" href="#publikasi">Publikasi</a>
+                <a class="text-sm font-medium text-slate-300 hover:text-primary transition-colors" href="#instagram">Instagram</a>
+            </nav>
+
+            <a href="#kontak" class="hidden md:flex items-center justify-center rounded-full px-6 py-2.5 bg-primary text-black text-sm font-bold tracking-wide hover:bg-primary-dark transition-all">
+                Booking Jadwal
+            </a>
+            
+            <!-- Mobile Menu Icon -->
+            <button class="md:hidden text-white">
+                <span class="material-symbols-outlined text-2xl">menu</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative min-h-screen flex items-center justify-center pt-20">
+        <!-- Background Image without Overlay -->
+        <div class="absolute inset-0 z-0">
+            <!-- Background Image -->
+            <div class="w-full h-full bg-cover bg-center" style="background-image: url('Assets/hero.webp');"></div>
+        </div>
+
+        <div class="relative z-20 text-center px-6 max-w-4xl mx-auto">
+            <div class="inline-block mb-4 px-4 py-1.5 rounded-full border border-primary/30 bg-primary/10 text-primary text-xs font-semibold uppercase tracking-widest backdrop-blur-sm">
+                Fotografi & Videografi Profesional
+            </div>
+            <h1 class="text-5xl md:text-7xl font-serif font-bold leading-tight mb-6">
+                Setiap bingkai Bercerita <br/><span class="text-primary italic">-om nano-</span>
+            </h1>
+            <p class="text-slate-300 text-lg md:text-xl font-light max-w-2xl mx-auto mb-8 leading-relaxed">
+                Dari formal sampai informal - All in!
+            </p>
+            
+            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <a href="#portofolio" class="w-full sm:w-auto flex items-center justify-center rounded-full h-14 px-8 bg-primary text-black text-base font-bold hover:scale-105 transition-transform">
+                    Lihat Portofolio
+                </a>
+                <a href="#kontak" class="w-full sm:w-auto flex items-center justify-center rounded-full h-14 px-8 border border-white/20 text-white text-base font-bold hover:bg-white/5 transition-colors">
+                    Hubungi via WhatsApp
+                </a>
+            </div>
+            
+            <div class="mt-10 flex items-center justify-center gap-2 text-sm text-slate-400">
+                <span class="relative flex h-3 w-3">
+                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+                  <span class="relative inline-flex rounded-full h-3 w-3 bg-primary"></span>
+                </span>
+                Rata-rata 15 sesi per bulan. Slot cepat penuh!
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="tentang" class="py-24 px-6 md:px-12 bg-background-dark">
+        <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
+            <div class="relative">
+                <div class="absolute -inset-4 border border-primary/20 rounded-2xl transform translate-x-4 translate-y-4"></div>
+                <img src="Assets/profile.webp" alt="Om Nano Fotografer" class="relative z-10 rounded-2xl w-full object-cover aspect-[4/5] shadow-2xl grayscale hover:grayscale-0 transition-all duration-700">
+            </div>
+            
+            <div class="flex flex-col gap-6">
+                <h2 class="text-primary text-sm font-bold tracking-widest uppercase">Halo, Panggil Saya</h2>
+                <h3 class="text-4xl md:text-5xl font-serif font-bold text-white">Om Nano</h3>
+                <p class="text-slate-400 text-lg leading-relaxed">
+                    Saya seorang fotografer dan kreator video yang biasa menangani berbagai jenis liputan. Prinsip saya sederhana: klien harus puas, dan hasil karya harus enak dilihat.
+                </p>
+                <p class="text-slate-400 text-lg leading-relaxed">
+                    Pekerjaan saya mencakup spektrum yang luas. Mulai dari dokumentasi acara corporate yang kaku dan formal, sesi foto keluarga atau pernikahan yang penuh emosi, hingga proyek editorial dan ilustrasi komersial. Saya bisa menyesuaikan gaya visual dengan kebutuhan Anda.
+                </p>
+                
+                <div class="grid grid-cols-2 gap-6 mt-6 border-t border-white/10 pt-8">
+                    <div>
+                        <h4 class="text-white font-bold text-xl mb-1">Berpengalaman</h4>
+                        <p class="text-slate-500 text-sm">Bertahun-tahun di industri visual.</p>
+                    </div>
+                    <div>
+                        <h4 class="text-white font-bold text-xl mb-1">Peralatan Pro</h4>
+                        <p class="text-slate-500 text-sm">Menggunakan gear standar industri terkini.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Big Numbers / Statistics Section -->
+    <section class="py-20 px-6 bg-neutral-dark border-y border-white/5">
+        <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 text-center" id="stats-container">
+            <div class="flex flex-col items-center">
+                <div class="flex items-baseline text-primary mb-2">
+                    <span class="counter text-7xl md:text-9xl font-serif font-bold" data-target="15">0</span>
+                    <span class="text-5xl md:text-7xl font-serif font-bold">+</span>
+                </div>
+                <p class="text-white text-lg md:text-xl uppercase tracking-widest font-bold">Rata-rata Sesi / Bulan</p>
+                <p class="text-slate-500 text-sm mt-2">Jadwal lumayan padat, booking jauh-jauh hari.</p>
+            </div>
+            <div class="flex flex-col items-center">
+                <div class="flex items-baseline text-primary mb-2">
+                    <span class="counter text-7xl md:text-9xl font-serif font-bold" data-target="100">0</span>
+                    <span class="text-5xl md:text-7xl font-serif font-bold">%</span>
+                </div>
+                <p class="text-white text-lg md:text-xl uppercase tracking-widest font-bold">Klien Puas</p>
+                <p class="text-slate-500 text-sm mt-2">Kepuasan Anda adalah prioritas utama saya.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Philosophy Flip Cards -->
+    <section class="py-24 px-6 md:px-12 relative bg-background-dark overflow-hidden">
+        <!-- Background Image without Overlay -->
+        <div class="absolute inset-0 z-0">
+            <div class="w-full h-full bg-cover bg-center" style="background-image: url('Assets/back2.webp');"></div>
+        </div>
+        <div class="max-w-7xl mx-auto relative z-20">
+            <div class="text-center mb-16">
+                <h2 class="text-primary text-sm font-bold tracking-widest uppercase mb-2">Pendekatan Kerja</h2>
+                <h3 class="text-3xl md:text-4xl font-serif font-bold text-white">Fleksibel & Profesional</h3>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Card 1 -->
+                <div class="flip-card cursor-pointer group">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <span class="material-symbols-outlined text-5xl text-primary mb-4">public</span>
+                            <h4 class="text-white text-2xl font-bold">Segala Kultur</h4>
+                            <p class="text-slate-400 text-sm mt-2">Klik/Hover untuk detail</p>
+                        </div>
+                        <div class="flip-card-back">
+                            <span class="material-symbols-outlined text-4xl mb-3">diversity_3</span>
+                            <h4 class="text-2xl font-bold mb-2 text-black">Terbuka & Menghargai</h4>
+                            <p class="text-black/80 font-medium px-4 text-center">Saya terbiasa melayani klien dari berbagai latar belakang suku, agama, dan budaya dengan respek penuh.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="flip-card cursor-pointer group">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <span class="material-symbols-outlined text-5xl text-primary mb-4">groups</span>
+                            <h4 class="text-white text-2xl font-bold">Berbagai Usia</h4>
+                            <p class="text-slate-400 text-sm mt-2">Klik/Hover untuk detail</p>
+                        </div>
+                        <div class="flip-card-back">
+                            <span class="material-symbols-outlined text-4xl mb-3">child_care</span>
+                            <h4 class="text-2xl font-bold mb-2 text-black">Semua Kalangan</h4>
+                            <p class="text-black/80 font-medium px-4 text-center">Dari memotret kelucuan balita, sesi gaya anak muda, hingga memotret potret klasik untuk lansia.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="flip-card cursor-pointer group">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <span class="material-symbols-outlined text-5xl text-primary mb-4">photo_camera</span>
+                            <h4 class="text-white text-2xl font-bold">Informal & Corporate</h4>
+                            <p class="text-slate-400 text-sm mt-2">Klik/Hover untuk detail</p>
+                        </div>
+                        <div class="flip-card-back">
+                            <span class="material-symbols-outlined text-4xl mb-3">business_center</span>
+                            <h4 class="text-2xl font-bold mb-2 text-black">Sangat Adaptif</h4>
+                            <p class="text-black/80 font-medium px-4 text-center">Gaya liputan bisa dibuat sangat santai (candid/informal) atau sangat terstruktur (corporate & komersial).</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services / Expertise -->
+    <section id="layanan" class="py-24 px-6 md:px-12 relative bg-neutral-dark border-y border-white/5 overflow-hidden">
+        <!-- Background Image without Overlay -->
+        <div class="absolute inset-0 z-0">
+            <div class="w-full h-full bg-cover bg-center" style="background-image: url('Assets/back3.webp');"></div>
+        </div>
+        <div class="max-w-7xl mx-auto relative z-20">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
+                <div class="max-w-2xl">
+                    <h2 class="text-primary text-sm font-bold tracking-widest uppercase mb-2">Layanan Saya</h2>
+                    <h3 class="text-3xl md:text-4xl font-serif font-bold text-white mb-4">Apa yang bisa saya kerjakan?</h3>
+                    <p class="text-slate-400 text-lg">Hampir semuanya. Saya menguasai berbagai genre fotografi dan produksi video ringan.</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-accent-dark p-6 rounded-2xl border border-white/5 hover:border-primary/50 transition-colors">
+                    <span class="material-symbols-outlined text-4xl text-primary mb-4">business</span>
+                    <h4 class="text-xl font-bold text-white mb-2">Corporate & Acara</h4>
+                    <p class="text-slate-400 text-sm">Dokumentasi perusahaan, gala dinner, seminar, dan foto profil eksekutif yang formal.</p>
+                </div>
+                <div class="bg-accent-dark p-6 rounded-2xl border border-white/5 hover:border-primary/50 transition-colors">
+                    <span class="material-symbols-outlined text-4xl text-primary mb-4">favorite</span>
+                    <h4 class="text-xl font-bold text-white mb-2">Pernikahan & Prewed</h4>
+                    <p class="text-slate-400 text-sm">Menangkap momen intim dan sakral dengan gaya bercerita (storytelling) yang natural.</p>
+                </div>
+                <div class="bg-accent-dark p-6 rounded-2xl border border-white/5 hover:border-primary/50 transition-colors">
+                    <span class="material-symbols-outlined text-4xl text-primary mb-4">auto_awesome</span>
+                    <h4 class="text-xl font-bold text-white mb-2">Editorial & Potret</h4>
+                    <p class="text-slate-400 text-sm">Sesi foto dengan konsep matang untuk kebutuhan majalah, fesyen, glamour, dan personal branding.</p>
+                </div>
+                <div class="bg-accent-dark p-6 rounded-2xl border border-white/5 hover:border-primary/50 transition-colors">
+                    <span class="material-symbols-outlined text-4xl text-primary mb-4">movie</span>
+                    <h4 class="text-xl font-bold text-white mb-2">Videografi</h4>
+                    <p class="text-slate-400 text-sm">Pembuatan video highlight, cinematic short, dan klip promosi singkat untuk sosial media.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mega Portfolio / Gallery Section -->
+    <section id="portofolio" class="py-24 px-6 md:px-12 bg-background-dark">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-center mb-12 gap-6">
+                <div>
+                    <h2 class="text-primary text-sm font-bold tracking-widest uppercase mb-2">Galeri Pilihan</h2>
+                    <h3 class="text-3xl md:text-4xl font-serif font-bold text-white">Karya Saya</h3>
+                </div>
+                
+                <!-- Filter Buttons -->
+                <div class="flex flex-wrap gap-2 justify-center md:justify-end">
+                    <button class="filter-btn active px-4 py-2 rounded-full bg-primary text-black text-sm font-bold" data-filter="all">Semua</button>
+                    <button class="filter-btn px-4 py-2 rounded-full border border-white/10 text-white hover:border-primary hover:text-primary text-sm font-medium transition-all" data-filter="corporate">Corporate</button>
+                    <button class="filter-btn px-4 py-2 rounded-full border border-white/10 text-white hover:border-primary hover:text-primary text-sm font-medium transition-all" data-filter="informal">Informal/Wedding</button>
+                    <button class="filter-btn px-4 py-2 rounded-full border border-white/10 text-white hover:border-primary hover:text-primary text-sm font-medium transition-all" data-filter="editorial">Editorial/Potret</button>
+                </div>
+            </div>
+
+            <!-- Compact Thumbnails Grid -->
+            <div class="thumb-grid" id="gallery-container">
+                <!-- Gallery items will be injected here by Javascript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Video Work Section -->
+    <section class="py-24 px-6 md:px-12 bg-neutral-dark border-y border-white/5">
+        <div class="max-w-7xl mx-auto mb-12 text-center">
+            <h2 class="text-primary text-sm font-bold tracking-widest uppercase mb-2">Videografi</h2>
+            <h3 class="text-3xl md:text-4xl font-serif font-bold text-white">Karya Video & Sinematik</h3>
+        </div>
+        <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+            <!-- Video 1 -->
+            <a href="https://youtu.be/3IjjO5aOf8I" target="_blank" class="aspect-video rounded-2xl overflow-hidden relative shadow-2xl bg-black border border-white/10 group block">
+                <img src="Assets/thumb1.webp" alt="Video Sinematik 1" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-300">
+                <div class="absolute inset-0 flex items-center justify-center">
+                    <div class="w-16 h-16 rounded-full bg-primary/90 text-black flex items-center justify-center transform group-hover:scale-110 transition-transform">
+                        <span class="material-symbols-outlined text-3xl">play_arrow</span>
+                    </div>
+                </div>
+            </a>
+            <!-- Video 2 -->
+            <a href="https://youtu.be/eXUflhtRC6U" target="_blank" class="aspect-video rounded-2xl overflow-hidden relative shadow-2xl bg-black border border-white/10 group block">
+                <img src="Assets/thumb2.webp" alt="Video Sinematik 2" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-300">
+                <div class="absolute inset-0 flex items-center justify-center">
+                    <div class="w-16 h-16 rounded-full bg-primary/90 text-black flex items-center justify-center transform group-hover:scale-110 transition-transform">
+                        <span class="material-symbols-outlined text-3xl">play_arrow</span>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </section>
+
+    <!-- Flipbook / Digital Publication Section -->
+    <section id="publikasi" class="relative py-24 px-6 md:px-12 bg-[#05140b] shadow-[inset_0_30px_60px_rgba(0,0,0,1),inset_0_-30px_60px_rgba(0,0,0,1)] border-y border-black overflow-hidden">
+        <!-- Texture Pattern Overlay (Dot pattern matching primary color) -->
+        <div class="absolute inset-0 z-0 opacity-50" style="background-image: radial-gradient(rgba(13, 242, 147, 0.15) 1.5px, transparent 1.5px); background-size: 24px 24px;"></div>
+        
+        <div class="max-w-7xl mx-auto mb-16 text-center relative z-10">
+            <h2 class="text-primary text-sm font-bold tracking-widest uppercase mb-2">Publikasi Editorial</h2>
+            <h3 class="text-3xl md:text-4xl font-serif font-bold text-white">Digital Photobook</h3>
+            <p class="text-slate-400 mt-4 max-w-2xl mx-auto text-lg">Eksplorasi karya fotografi dan ilustrasi saya yang dirangkum secara elegan dalam format majalah digital interaktif.</p>
+        </div>
+        
+        <div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-8 relative z-10">
+            <!-- Book 1: Vermilion -->
+            <a href="https://jesicastudio-bit.github.io/vermilion/" target="_blank" class="group flex flex-col items-center">
+                <!-- Cover Design with 3D Book Effect -->
+                <div class="relative w-3/4 max-w-[320px] aspect-[3/4] rounded-r-2xl rounded-l-sm shadow-[20px_20px_40px_rgba(0,0,0,0.8)] border-l-8 border-l-primary/30 overflow-hidden transform group-hover:-translate-y-4 transition-all duration-500 bg-accent-dark">
+                    <img src="Assets/vermilion.webp" alt="Cover Buku Vermilion" class="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-opacity duration-500 group-hover:scale-105">
+                    <!-- Spine Highlight / Lighting Effect -->
+                    <div class="absolute inset-0 bg-gradient-to-r from-white/20 via-transparent to-transparent w-10"></div>
+                    <!-- Hover Play Icon (Optional hint) -->
+                    <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black/30">
+                        <span class="material-symbols-outlined text-white text-5xl">menu_book</span>
+                    </div>
+                </div>
+                <!-- Title & Meta -->
+                <div class="mt-8 text-center">
+                    <h4 class="text-3xl font-serif font-bold text-white group-hover:text-primary transition-colors">Vermilion</h4>
+                    <p class="text-slate-500 text-sm tracking-widest uppercase mt-3 font-bold">Buka Flipbook <span class="material-symbols-outlined text-sm align-middle">open_in_new</span></p>
+                </div>
+            </a>
+
+            <!-- Book 2: Fortunova -->
+            <a href="https://jesicastudio-bit.github.io/fortunova/" target="_blank" class="group flex flex-col items-center">
+                <!-- Cover Design with 3D Book Effect -->
+                <div class="relative w-3/4 max-w-[320px] aspect-[3/4] rounded-r-2xl rounded-l-sm shadow-[20px_20px_40px_rgba(0,0,0,0.8)] border-l-8 border-l-primary/30 overflow-hidden transform group-hover:-translate-y-4 transition-all duration-500 bg-accent-dark">
+                    <img src="Assets/fortunova.webp" alt="Cover Buku Fortunova" class="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-opacity duration-500 group-hover:scale-105">
+                    <!-- Spine Highlight / Lighting Effect -->
+                    <div class="absolute inset-0 bg-gradient-to-r from-white/20 via-transparent to-transparent w-10"></div>
+                    <!-- Hover Play Icon -->
+                    <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black/30">
+                        <span class="material-symbols-outlined text-white text-5xl">menu_book</span>
+                    </div>
+                </div>
+                <!-- Title & Meta -->
+                <div class="mt-8 text-center">
+                    <h4 class="text-3xl font-serif font-bold text-white group-hover:text-primary transition-colors">Fortunova</h4>
+                    <p class="text-slate-500 text-sm tracking-widest uppercase mt-3 font-bold">Buka Flipbook <span class="material-symbols-outlined text-sm align-middle">open_in_new</span></p>
+                </div>
+            </a>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="py-24 px-6 md:px-12 bg-neutral-dark">
+        <div class="max-w-7xl mx-auto text-center mb-16">
+            <h2 class="text-primary text-sm font-bold tracking-widest uppercase mb-2">Testimoni</h2>
+            <h3 class="text-3xl md:text-4xl font-serif font-bold text-white">Kata Mereka (100% Puas!)</h3>
+        </div>
+        <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="p-8 rounded-2xl bg-neutral-dark border border-white/5 relative">
+                <span class="material-symbols-outlined text-primary text-5xl absolute top-6 right-6 opacity-20">format_quote</span>
+                <p class="text-slate-300 text-sm leading-relaxed mb-6">"Hasil foto corporate kami rapi banget. Om Nano tahu angle yang pas biar direksi kelihatan berwibawa tapi tetap ramah. Pengerjaan juga cepat."</p>
+                <div class="flex items-center gap-4">
+                    <div class="w-12 h-12 bg-slate-700 rounded-full overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&w=100&q=80" class="w-full h-full object-cover">
+                    </div>
+                    <div>
+                        <h5 class="text-white font-bold text-sm">Bpk. Hendra</h5>
+                        <p class="text-primary text-xs">HR Director</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="p-8 rounded-2xl bg-neutral-dark border border-white/5 relative">
+                <span class="material-symbols-outlined text-primary text-5xl absolute top-6 right-6 opacity-20">format_quote</span>
+                <p class="text-slate-300 text-sm leading-relaxed mb-6">"Seru banget sesi prewed sama Om Nano! Awalnya kaku, tapi dia jago nyairin suasana. Hasilnya natural dan gak keliatan maksa sama sekali."</p>
+                <div class="flex items-center gap-4">
+                    <div class="w-12 h-12 bg-slate-700 rounded-full overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&w=100&q=80" class="w-full h-full object-cover">
+                    </div>
+                    <div>
+                        <h5 class="text-white font-bold text-sm">Siska & Doni</h5>
+                        <p class="text-primary text-xs">Klien Pernikahan</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="p-8 rounded-2xl bg-neutral-dark border border-white/5 relative">
+                <span class="material-symbols-outlined text-primary text-5xl absolute top-6 right-6 opacity-20">format_quote</span>
+                <p class="text-slate-300 text-sm leading-relaxed mb-6">"Butuh foto untuk portofolio modeling dan hasilnya luar biasa. Pencahayaannya mewah, benar-benar sekelas majalah profesional. Rekomen!"</p>
+                <div class="flex items-center gap-4">
+                    <div class="w-12 h-12 bg-slate-700 rounded-full overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?ixlib=rb-4.0.3&w=100&q=80" class="w-full h-full object-cover">
+                    </div>
+                    <div>
+                        <h5 class="text-white font-bold text-sm">Anya</h5>
+                        <p class="text-primary text-xs">Freelance Model</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Instagram Placeholder (Simulated Iframe Grid) -->
+    <section id="instagram" class="py-24 px-6 bg-neutral-dark border-y border-white/5">
+        <div class="max-w-6xl mx-auto flex flex-col items-center gap-8">
+            <div class="text-center">
+                <span class="material-symbols-outlined text-4xl text-primary mb-2">camera_alt</span>
+                <h3 class="text-3xl font-serif font-bold text-white mb-2">Instagram Feed</h3>
+                <p class="text-slate-400">Follow untuk update karya terbaru <a href="https://instagram.com/hendratno.penok" target="_blank" class="text-primary hover:underline">@hendratno.penok</a></p>
+            </div>
+            
+            <!-- 
+              Note untuk Om Nano: 
+              Karena kode iframe dari Instagram asli sering diblokir peramban jika hanya file HTML biasa, 
+              ini adalah grid yang mensimulasikan tampilan Instagram.
+              Jika Anda memakai plugin (seperti SnapWidget atau Elfsight), letakkan kode iframe Anda di div bawah ini.
+            -->
+            <div class="w-full grid grid-cols-2 md:grid-cols-5 gap-1 md:gap-2">
+                <a href="https://instagram.com/hendratno.penok" target="_blank" class="overflow-hidden group">
+                    <img src="Assets/ig1.webp" alt="IG 1" class="w-full h-auto object-cover opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-300">
+                </a>
+                <a href="https://instagram.com/hendratno.penok" target="_blank" class="overflow-hidden group">
+                    <img src="Assets/ig2.webp" alt="IG 2" class="w-full h-auto object-cover opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-300">
+                </a>
+                <a href="https://instagram.com/hendratno.penok" target="_blank" class="overflow-hidden group">
+                    <img src="Assets/ig3.webp" alt="IG 3" class="w-full h-auto object-cover opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-300">
+                </a>
+                <a href="https://instagram.com/hendratno.penok" target="_blank" class="overflow-hidden group">
+                    <img src="Assets/ig4.webp" alt="IG 4" class="w-full h-auto object-cover opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-300">
+                </a>
+                <a href="https://instagram.com/hendratno.penok" target="_blank" class="overflow-hidden group">
+                    <img src="Assets/ig5.webp" alt="IG 5" class="w-full h-auto object-cover opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-300">
+                </a>
+                <a href="https://instagram.com/hendratno.penok" target="_blank" class="overflow-hidden group">
+                    <img src="Assets/ig6.webp" alt="IG 6" class="w-full h-auto object-cover opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-300">
+                </a>
+                <a href="https://instagram.com/hendratno.penok" target="_blank" class="overflow-hidden group">
+                    <img src="Assets/ig7.webp" alt="IG 7" class="w-full h-auto object-cover opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-300">
+                </a>
+                <a href="https://instagram.com/hendratno.penok" target="_blank" class="overflow-hidden group">
+                    <img src="Assets/ig8.webp" alt="IG 8" class="w-full h-auto object-cover opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-300">
+                </a>
+                <a href="https://instagram.com/hendratno.penok" target="_blank" class="overflow-hidden group">
+                    <img src="Assets/ig9.webp" alt="IG 9" class="w-full h-auto object-cover opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-300">
+                </a>
+                <a href="https://instagram.com/hendratno.penok" target="_blank" class="overflow-hidden group">
+                    <img src="Assets/ig10.webp" alt="IG 10" class="w-full h-auto object-cover opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-300">
+                </a>
+            </div>
+            
+            <a href="https://instagram.com/hendratno.penok" target="_blank" class="px-6 py-2 border border-white/20 rounded-full text-white text-sm font-medium hover:bg-white/5 transition-colors">Lihat Halaman Instagram</a>
+        </div>
+    </section>
+
+    <!-- Contact & Booking Section -->
+    <section id="kontak" class="py-24 px-6 md:px-12 bg-background-dark">
+        <div class="max-w-6xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
+            
+            <div class="flex flex-col gap-8">
+                <div>
+                    <h2 class="text-primary text-sm font-bold tracking-widest uppercase mb-2">Mari Ngobrol</h2>
+                    <h3 class="text-4xl md:text-5xl font-serif font-bold text-white mb-6">Booking Jadwal</h3>
+                    
+                    <!-- Notification card -->
+                    <div class="bg-primary/10 border border-primary/30 rounded-xl p-5 mb-6 flex items-start gap-4">
+                        <span class="material-symbols-outlined text-primary mt-0.5">info</span>
+                        <div>
+                            <p class="text-white font-bold">Pemberitahuan Penting!</p>
+                            <p class="text-slate-300 text-sm mt-1">Saya rata-rata melayani <strong class="text-primary">15 sesi liputan setiap bulan</strong> dan slot selalu penuh dengan cepat. Jika Anda memiliki tanggal pasti, segera hubungi saya sebelum keduluan orang lain.</p>
+                        </div>
+                    </div>
+
+                    <p class="text-slate-400 text-lg mb-8">
+                        Tanya-tanya dulu boleh. Silakan hubungi via WhatsApp untuk respon paling cepat, atau isi form di samping jika Anda lebih suka via email.
+                    </p>
+                </div>
+
+                <!-- WA Button -->
+                <a href="https://wa.me/6282245345381" target="_blank" class="flex items-center gap-4 p-4 rounded-xl bg-[#25D366]/10 border border-[#25D366]/30 text-white hover:bg-[#25D366]/20 transition-all w-fit group">
+                    <div class="w-12 h-12 bg-[#25D366] rounded-full flex items-center justify-center text-white">
+                        <span class="material-symbols-outlined text-2xl">chat</span>
+                    </div>
+                    <div>
+                        <p class="text-xs font-bold uppercase tracking-wider text-slate-400 group-hover:text-white transition-colors">Respon Cepat</p>
+                        <p class="text-lg font-bold">Chat WA: +62 822-4534-5381</p>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Contact Form -->
+            <div class="bg-neutral-dark p-8 md:p-10 rounded-3xl border border-white/5 shadow-2xl">
+                <form id="wa-form" class="flex flex-col gap-5">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                        <div class="flex flex-col gap-2">
+                            <label class="text-sm text-slate-400">Nama Lengkap</label>
+                            <input id="wa-name" type="text" placeholder="Siapa nama Anda?" class="bg-background-dark border border-white/10 rounded-xl h-12 px-4 focus:ring-1 focus:ring-primary focus:border-primary outline-none transition-all text-white w-full" required />
+                        </div>
+                        <div class="flex flex-col gap-2">
+                            <label class="text-sm text-slate-400">Nomor WA / Handphone</label>
+                            <input id="wa-phone" type="text" placeholder="08xx..." class="bg-background-dark border border-white/10 rounded-xl h-12 px-4 focus:ring-1 focus:ring-primary focus:border-primary outline-none transition-all text-white w-full" required />
+                        </div>
+                    </div>
+                    
+                    <div class="flex flex-col gap-2">
+                        <label class="text-sm text-slate-400">Pilih Jenis Layanan</label>
+                        <select id="wa-service" class="bg-background-dark border border-white/10 rounded-xl h-12 px-4 focus:ring-1 focus:ring-primary focus:border-primary outline-none transition-all text-white w-full cursor-pointer appearance-none">
+                            <option value="Fotografi Informal / Keluarga">Fotografi Informal / Keluarga</option>
+                            <option value="Corporate / Perusahaan">Corporate / Perusahaan</option>
+                            <option value="Pernikahan / Prewedding">Pernikahan / Prewedding</option>
+                            <option value="Sesi Potret / Editorial">Sesi Potret / Editorial</option>
+                            <option value="Videografi">Videografi</option>
+                        </select>
+                    </div>
+                    
+                    <div class="flex flex-col gap-2">
+                        <label class="text-sm text-slate-400">Ceritakan Rencana Anda</label>
+                        <textarea id="wa-message" rows="4" placeholder="Kapan acaranya? Di mana?..." class="bg-background-dark border border-white/10 rounded-xl p-4 focus:ring-1 focus:ring-primary focus:border-primary outline-none transition-all text-white w-full" required></textarea>
+                    </div>
+                    
+                    <button type="submit" class="mt-2 bg-[#25D366] text-black font-bold h-14 rounded-xl hover:brightness-110 transition-all uppercase tracking-widest text-sm w-full flex items-center justify-center gap-2">
+                        <span class="material-symbols-outlined">send</span> Kirim Langsung ke WA
+                    </button>
+                </form>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-10 px-6 border-t border-white/10 bg-black text-center">
+        <div class="max-w-4xl mx-auto flex flex-col items-center gap-6">
+            <div class="flex items-center gap-2 text-primary opacity-80">
+                <span class="material-symbols-outlined text-2xl">camera</span>
+                <h2 class="text-white text-lg font-bold font-serif tracking-widest">OM NANO</h2>
+            </div>
+            <p class="text-slate-500 text-sm">
+                © 2026 Portofolio Om Nano. Mengabadikan visual dengan gaya dan dedikasi.
+            </p>
+        </div>
+    </footer>
+
+    <!-- Lightbox Element -->
+    <div id="lightbox" class="fixed inset-0 z-[100] bg-black/95 hidden flex-col items-center justify-center backdrop-blur-sm opacity-0 transition-opacity duration-300">
+        <!-- Close button -->
+        <button onclick="closeLightbox()" class="absolute top-6 right-6 text-white hover:text-primary transition-colors p-2 bg-white/10 rounded-full z-10">
+            <span class="material-symbols-outlined text-3xl">close</span>
+        </button>
+        
+        <!-- Navigation -->
+        <button onclick="prevImage(event)" class="absolute left-2 md:left-6 top-1/2 -translate-y-1/2 text-white hover:text-primary transition-colors p-2 md:p-3 bg-white/10 rounded-full z-10">
+            <span class="material-symbols-outlined text-3xl md:text-4xl">chevron_left</span>
+        </button>
+        <button onclick="nextImage(event)" class="absolute right-2 md:right-6 top-1/2 -translate-y-1/2 text-white hover:text-primary transition-colors p-2 md:p-3 bg-white/10 rounded-full z-10">
+            <span class="material-symbols-outlined text-3xl md:text-4xl">chevron_right</span>
+        </button>
+
+        <!-- Image Container -->
+        <div class="relative w-full max-w-6xl px-12 md:px-24 h-full flex items-center justify-center">
+            <img id="lightbox-img" src="" alt="Preview Karya" class="max-w-full max-h-[85vh] object-contain drop-shadow-2xl">
+        </div>
+        
+        <!-- Info Bottom -->
+        <div class="absolute bottom-6 left-0 w-full text-center pointer-events-none">
+            <p id="lightbox-counter" class="text-slate-400 text-sm font-medium tracking-widest uppercase bg-black/50 inline-block px-4 py-1 rounded-full backdrop-blur-md">Karya 1 / 64</p>
+        </div>
+    </div>
+
+    <!-- Script for Counter Animation & Gallery Filter -->
+    <script>
+        // --- Lightbox Variables & Functions ---
+        let currentImageIndex = 1;
+        const totalImages = 64;
+
+        function openLightbox(index) {
+            currentImageIndex = index;
+            updateLightboxContent();
+            const lb = document.getElementById('lightbox');
+            lb.classList.remove('hidden');
+            lb.classList.add('flex');
+            setTimeout(() => lb.classList.remove('opacity-0'), 10);
+        }
+
+        function closeLightbox() {
+            const lb = document.getElementById('lightbox');
+            lb.classList.add('opacity-0');
+            setTimeout(() => {
+                lb.classList.add('hidden');
+                lb.classList.remove('flex');
+            }, 300);
+        }
+
+        function nextImage(e) {
+            if(e) e.stopPropagation();
+            currentImageIndex = currentImageIndex < totalImages ? currentImageIndex + 1 : 1;
+            updateLightboxContent();
+        }
+
+        function prevImage(e) {
+            if(e) e.stopPropagation();
+            currentImageIndex = currentImageIndex > 1 ? currentImageIndex - 1 : totalImages;
+            updateLightboxContent();
+        }
+
+        function updateLightboxContent() {
+            document.getElementById('lightbox-img').src = `Assets/work${currentImageIndex}.webp`;
+            document.getElementById('lightbox-counter').innerText = `Karya ${currentImageIndex} / ${totalImages}`;
+        }
+
+        // Tutup Lightbox jika tekan tombol Escape atau Navigasi Panah
+        document.addEventListener('keydown', (e) => {
+            const lb = document.getElementById('lightbox');
+            if (!lb.classList.contains('hidden')) {
+                if (e.key === 'Escape') closeLightbox();
+                if (e.key === 'ArrowRight') nextImage();
+                if (e.key === 'ArrowLeft') prevImage();
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // 0. Auto-Generate 64 Gallery Items (Compact View)
+            const galleryContainer = document.getElementById('gallery-container');
+            const categories = ['corporate', 'informal', 'editorial'];
+            let galleryHTML = '';
+            
+            for(let i = 1; i <= totalImages; i++) {
+                // Pilih kategori secara acak
+                const randomCat = categories[Math.floor(Math.random() * categories.length)];
+                
+                // HTML untuk Kotak Gambar Compact (Thumbnail)
+                galleryHTML += `
+                <div class="aspect-square gallery-item group relative overflow-hidden rounded-lg bg-accent-dark cursor-pointer" data-category="${randomCat}" onclick="openLightbox(${i})">
+                    <img src="Assets/work${i}.webp" alt="Karya ${i}" loading="lazy" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500 opacity-90 group-hover:opacity-100">
+                    <div class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                        <span class="material-symbols-outlined text-black bg-primary p-2 rounded-full font-bold shadow-lg">zoom_in</span>
+                    </div>
+                </div>
+                `;
+            }
+            if(galleryContainer) galleryContainer.innerHTML = galleryHTML;
+
+            // 1. Counter Animation (Intersection Observer)
+            const counters = document.querySelectorAll('.counter');
+            const speed = 50; // Kecepatan hitung
+
+            const animateCounters = (entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const counter = entry.target;
+                        const target = +counter.getAttribute('data-target');
+                        
+                        const updateCount = () => {
+                            const count = +counter.innerText;
+                            const inc = target / speed;
+
+                            if (count < target) {
+                                counter.innerText = Math.ceil(count + inc);
+                                setTimeout(updateCount, 40);
+                            } else {
+                                counter.innerText = target;
+                            }
+                        };
+                        
+                        updateCount();
+                        observer.unobserve(counter); // Hanya animasi 1 kali
+                    }
+                });
+            };
+
+            const counterObserver = new IntersectionObserver(animateCounters, {
+                threshold: 0.5 // Trigger jika setengah elemen terlihat
+            });
+
+            counters.forEach(counter => {
+                counterObserver.observe(counter);
+            });
+
+            // 2. Gallery Filter Logic
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            const galleryItems = document.querySelectorAll('.gallery-item');
+
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    // Remove active styles from all buttons
+                    filterBtns.forEach(b => {
+                        b.classList.remove('bg-primary', 'text-black');
+                        b.classList.add('border-white/10', 'text-white');
+                    });
+                    
+                    // Add active style to clicked button
+                    btn.classList.remove('border-white/10', 'text-white');
+                    btn.classList.add('bg-primary', 'text-black');
+
+                    const filterValue = btn.getAttribute('data-filter');
+
+                    // Show/Hide items based on filter
+                    galleryItems.forEach(item => {
+                        if (filterValue === 'all' || item.getAttribute('data-category') === filterValue) {
+                            item.classList.remove('hidden');
+                        } else {
+                            item.classList.add('hidden');
+                        }
+                    });
+                });
+            });
+
+            // 3. Handle Form via WhatsApp
+            const waForm = document.getElementById('wa-form');
+            if(waForm) {
+                waForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    
+                    const name = document.getElementById('wa-name').value;
+                    const phone = document.getElementById('wa-phone').value;
+                    const service = document.getElementById('wa-service').value;
+                    const message = document.getElementById('wa-message').value;
+                    
+                    const textContent = `Halo Om Nano! Saya tertarik untuk booking sesi liputan.\n\n*Nama:* ${name}\n*No HP:* ${phone}\n*Layanan:* ${service}\n*Rencana & Pesan:* ${message}`;
+                    const encodedText = encodeURIComponent(textContent);
+                    
+                    window.open(`https://wa.me/6282245345381?text=${encodedText}`, '_blank');
+                });
+            }
+        });
+    </script>
+</body>
+</html>
